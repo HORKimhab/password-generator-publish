@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'"
+    />
+    <meta http-equiv="Referrer-Policy" content="no-referrer" />
+    <title>Secure Password Generator</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="page">
+      <section class="card" aria-labelledby="app-title">
+        <header class="hero">
+          <div class="hero__brand">
+            <div class="hero__icon" aria-hidden="true">🔑</div>
+            <div>
+              <h1 id="app-title">Secure Password Generator</h1>
+              <p class="hero__subtitle">Fast, local, and generated on your device. <a href="{{ url('/') }}" title="រៀន​ it, រៀន​ coding, រៀន it ជាមួយការ​ support monthly. -> https://rean-it.com">rean-it.com</a></p>
+              <p class="hero__subtitle">រៀនអាយធីជាមួយការ​ support monthly. <a target="_blank" href="https://shorturl.at/khCuD" rel="noopener noreferrer" title="រៀន​ it, រៀន​ coding, រៀនអាយធីជាមួយការ​ support monthly.">https://shorturl.at/khCuD</a></p>
+            </div>
+          </div>
+
+          <div class="hero__actions">
+            <label class="theme-switch" for="theme-toggle">
+              <span class="theme-switch__label">Dark mode</span>
+              <input id="theme-toggle" type="checkbox" role="switch" aria-label="Toggle dark mode" />
+            </label>
+
+            <label class="language-picker">
+              <span class="sr-only">Language</span>
+              <select aria-label="Language">
+                <option selected>English</option>
+              </select>
+            </label>
+          </div>
+        </header>
+
+        <form class="generator-form" id="generator-form" autocomplete="off">
+          <div class="setting-grid">
+            <label for="length">Password Length:</label>
+            <input
+              id="length"
+              name="length"
+              type="number"
+              min="1"
+              max="999"
+              step="1"
+              value="10"
+              inputmode="numeric"
+            />
+
+            <span>Include Symbols:</span>
+            <label class="checkline">
+              <input type="checkbox" id="symbols" checked />
+              <span>( e.g. @#$% )</span>
+            </label>
+
+            <span>Include Numbers:</span>
+            <label class="checkline">
+              <input type="checkbox" id="numbers" checked />
+              <span>( e.g. 123456 )</span>
+            </label>
+
+            <span>Include Lowercase Characters:</span>
+            <label class="checkline">
+              <input type="checkbox" id="lowercase" checked />
+              <span>( e.g. abcdefgh )</span>
+            </label>
+
+            <span>Include Uppercase Characters:</span>
+            <label class="checkline">
+              <input type="checkbox" id="uppercase" checked />
+              <span>( e.g. ABCDEFGH )</span>
+            </label>
+
+            <span>Include Your Custom Word:</span>
+            <div class="custom-input-group">
+              <label class="checkline">
+                <input type="checkbox" id="customEnabled" />
+                <span>( e.g. ខ្ញុំស្រឡាញ់គ្រួសារ,អ្នកអាចធ្វើបាន,ស្រឡាញ់អ្នកជុំវិញខ្លួន, I love bitcoin, rean-it.com)</span>
+              </label>
+              <input
+                id="customChars"
+                name="customChars"
+                type="text"
+                maxlength="256"
+                placeholder="Enter comma-separated custom words"
+                autocomplete="off"
+                spellcheck="false"
+              />
+            </div>
+
+            <span>Exclude Similar Characters:</span>
+            <label class="checkline">
+              <input type="checkbox" id="excludeSimilar" checked />
+              <span>( e.g. i, l, 1, L, o, 0, O )</span>
+            </label>
+
+            <span>Exclude Ambiguous Characters:</span>
+            <label class="checkline">
+              <input type="checkbox" id="excludeAmbiguous" checked />
+              <span>( {}[]()/\'"&lt;&gt;~,;:. )</span>
+            </label>
+
+            <span>Generate On Your Device:</span>
+            <div class="custom-input-group">
+              <label class="checkline">
+                <input type="checkbox" checked disabled />
+                <span>( do NOT send across the Internet )</span>
+              </label>
+            </div>
+
+            <span>Auto-Select:</span>
+            <label class="checkline">
+              <input type="checkbox" id="autoselect" />
+              <span>( select the password automatically )</span>
+            </label>
+
+            <span>Save My Preference:</span>
+            <label class="checkline">
+              <input type="checkbox" id="savePreference" />
+              <span>( save all the settings above for later use )</span>
+            </label>
+
+            <span>Load My Settings Anywhere:</span>
+            <div class="inline-note">URL to load my settings on other computers quickly</div>
+          </div>
+
+          <div class="controls">
+            <button type="submit" class="primary">Generate Password</button>
+          </div>
+        </form>
+
+        <section class="output" aria-live="polite">
+          <div class="output__row">
+            <label for="password-output">Your New Password:</label>
+            <div class="output__controls">
+              <textarea id="password-output" readonly rows="1"></textarea>
+              <button type="button" id="copy-button" class="copy-button">Copy</button>
+            </div>
+          </div>
+
+          <div class="output__row">
+            <span>Remember your password:</span>
+            <p id="memory-hint" class="memory-hint"></p>
+          </div>
+        </section>
+
+        <section class="seo-copy" aria-labelledby="seo-copy-title">
+          <h2 id="seo-copy-title">Strong Password Generator for Better Account Security</h2>
+          <p>
+            This secure password generator helps you create strong random passwords for email, social media,
+            banking, business tools, and personal accounts. You can customize password length, include symbols,
+            numbers, uppercase and lowercase letters, and even add your own custom words.
+          </p>
+          <p>
+            A strong password reduces the risk of brute-force attacks, credential stuffing, and weak-password reuse.
+            For best results, generate a long password, keep it unique for each account, and store it in a trusted
+            password manager.
+          </p>
+        </section>
+
+        <section class="seo-faq" aria-labelledby="faq-title">
+          <h2 id="faq-title">Password Generator FAQ</h2>
+          <h3>How does this password generator work?</h3>
+          <p>
+            It creates a random password based on your selected options directly in your browser, including length,
+            symbols, numbers, uppercase letters, lowercase letters, and custom words.
+          </p>
+
+          <h3>Is this password generator secure?</h3>
+          <p>
+            The generator runs locally in your browser, so the password creation process stays on your device instead
+            of relying on a remote server.
+          </p>
+
+          <h3>What is a strong password?</h3>
+          <p>
+            A strong password is long, unique, hard to predict, and uses a balanced mix of characters. Avoid names,
+            dates, short words, and reused passwords.
+          </p>
+        </section>
+      </section>
+    </main>
+
+    <script src="./app.protected.js"></script>
+  </body>
+</html>
